@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma skills sync || exit 0",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1149.0",
-    "@prisma/client": "^7.10.0",
+    "@prisma/client": "^6.19.3",
     "@tanstack/react-virtual": "^3.14.13",
     "chokidar": "^5.0.0",
     "lucide-react": "^1.52.0",
@@ -38,7 +38,7 @@
     "@types/sharp": "^0.32.0",
     "eslint": "^9",
     "eslint-config-next": "16.3.8",
-    "prisma": "8.0.0-rc.22",
+    "prisma": "6.4.1",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5"
