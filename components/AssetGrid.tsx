@@ -162,6 +162,13 @@ export function AssetGrid({ initialAssets }: { initialAssets: AssetItem[] }) {
       setIsExporting(false);
     }
   };
+  function getMediaSrc(path?: string | null): string {
+    if (!path) return "";
+    if (path.startsWith("http://") || path.startsWith("https://")) {
+      return path;
+    }
+    return `/api/media/${path}`;
+  }
 
   // Save prompt text
   const handleSavePrompt = () => {
@@ -589,7 +596,7 @@ export function AssetGrid({ initialAssets }: { initialAssets: AssetItem[] }) {
                           <div className="relative h-56 w-full overflow-hidden bg-neutral-950">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img
-                              src={`/api/media/${asset.filePath}`}
+                              src={getMediaSrc(asset.filePath)}
                               alt={asset.fileName}
                               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                               loading="lazy"
@@ -798,7 +805,7 @@ export function AssetGrid({ initialAssets }: { initialAssets: AssetItem[] }) {
                   <div className="relative flex-1 w-full flex items-center justify-center overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`/api/media/${asset.filePath}`}
+                      src={getMediaSrc(asset.filePath)}
                       alt={asset.fileName}
                       className="max-h-full max-w-full object-contain rounded-lg shadow-md"
                     />
@@ -866,7 +873,7 @@ export function AssetGrid({ initialAssets }: { initialAssets: AssetItem[] }) {
             <div className="relative mt-3 flex items-center justify-center overflow-hidden max-h-[75vh]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/api/media/${currentFocusedAsset.filePath}`}
+                src={getMediaSrc(currentFocusedAsset.filePath)}
                 alt={currentFocusedAsset.fileName}
                 className="max-h-[75vh] w-auto rounded-lg object-contain"
               />
