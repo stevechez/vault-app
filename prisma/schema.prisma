@@ -1,0 +1,36 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Asset {
+  id          String   @id @default(cuid())
+  filePath    String   @unique
+  fileName    String
+  persona     String?  // "Hallie", "Kira", "Mia", etc.
+  rating      Int      @default(0) // 0 to 5
+  width       Int?
+  height      Int?
+  aspectRatio Float?   // width / height
+  promptText  String?
+  isFavorite  Boolean  @default(false)
+  isArchived  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tags        Tag[]
+
+  @@index([persona])
+  @@index([rating])
+  @@index([createdAt])
+}
+
+model Tag {
+  id      String  @id @default(cuid())
+  name    String  @unique
+  assets  Asset[]
+}
